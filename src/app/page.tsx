@@ -5,7 +5,7 @@ import SideBar from "@/components/SideBar";
 import { useState } from "react";
 
 export default function Home() {
-  const [isDMJChat, setIsDMJChat] = useState<boolean>(false);
+  const [isDMJChat, setIsDMJChat] = useState<boolean>(true);
   const chatTitle = isDMJChat ? "DMJ CHAT" : "ZUBIN CHAT";
   return (
     <div className="w-full h-screen flex bg-black font-sans dark:bg-black text-white">
