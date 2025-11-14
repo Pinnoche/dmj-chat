@@ -83,7 +83,7 @@ export default function Chat({ chatTitle }: { chatTitle: string }) {
         });
 
         if (botMsg.data.status === "running") {
-          setTimeout(() => executions(executionId), 3000);
+          setTimeout(() => executions(executionId), 5000);
         } else if (botMsg.data.status === "completed") {
           const botMessage: ChatType = {
             id: messageList.length + 2,
