@@ -27,7 +27,7 @@ export default function Chat({ chatTitle }: { chatTitle: string }) {
     if (userMessage.trim() === "") return;
     try {
       const newMessage: ChatType = {
-        id: messageList.length + 1,
+        id: Math.floor(Math.random() * 1000000),
         sender: "user",
         message: userMessage,
         timestamp: new Date(),
@@ -44,7 +44,6 @@ export default function Chat({ chatTitle }: { chatTitle: string }) {
       setUserMessage("");
 
       if (chatTitle === "DMJ CHAT") {
-        console.log(messageList);
         const res = await apiClient.post(
           `${process.env.NEXT_PUBLIC_API_URL2}/api/v1/agents/ask`,
           {
@@ -57,7 +56,7 @@ export default function Chat({ chatTitle }: { chatTitle: string }) {
           }
         );
         const botMessage: ChatType = {
-          id: dmjmessageList.length + 2,
+          id: Math.floor(Math.random() * 1000000),
           sender: "assistant",
           message: res.data,
           timestamp: new Date(),
@@ -89,7 +88,7 @@ export default function Chat({ chatTitle }: { chatTitle: string }) {
           setTimeout(() => executions(executionId), 5000);
         } else if (botMsg.data.status === "completed") {
           const botMessage: ChatType = {
-            id: messageList.length + 2,
+            id: Math.floor(Math.random() * 1000000),
             sender: "assistant",
             message: botMsg.data.final_result.result,
             timestamp: new Date(),
@@ -101,7 +100,7 @@ export default function Chat({ chatTitle }: { chatTitle: string }) {
           botMsg.data.final_result
         ) {
           const botMessage: ChatType = {
-            id: messageList.length + 2,
+            id: Math.floor(Math.random() * 1000000),
             sender: "assistant",
             message: botMsg.data.final_result.result,
             timestamp: new Date(),
