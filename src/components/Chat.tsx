@@ -1,6 +1,5 @@
 "use client";
 import { apiClient } from "@/lib/api-client";
-import { mockChats } from "@/lib/chats";
 import { smartFormat } from "@/lib/smartFormatter";
 import { ChatType } from "@/types";
 import { Plus } from "lucide-react";
@@ -11,8 +10,8 @@ import rehypeHighlight from "rehype-highlight";
 import remarkGfm from "remark-gfm";
 
 export default function Chat({ chatTitle }: { chatTitle: string }) {
-  const [messageList, setMessageList] = useState<ChatType[]>(mockChats);
-  const [dmjmessageList, setDmjMessageList] = useState<ChatType[]>(mockChats);
+  const [messageList, setMessageList] = useState<ChatType[]>([]);
+  const [dmjmessageList, setDmjMessageList] = useState<ChatType[]>([]);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [userMessage, setUserMessage] = useState<string>("");
   const lastMsgRef = useRef<HTMLDivElement | null>(null);
@@ -119,6 +118,10 @@ export default function Chat({ chatTitle }: { chatTitle: string }) {
     }
   };
 
+  const handleX = () => {
+    window.open("https://x.com/iziedking", "_blank");
+  };
+
   return (
     <div className="w-full px-16 py-6 flex-1 flex flex-col justify-between overflow-y-auto">
       <div className="w-full flex-1 overflow-y-auto space-y-8 p-2 custom-scrollbar">
@@ -170,16 +173,24 @@ export default function Chat({ chatTitle }: { chatTitle: string }) {
               >
                 <div className={`w-full flex items-start gap-4`}>
                   <p
-                    className={`px-2 py-3 rounded-2xl ${
+                    className={`px-2 py-3 rounded-2xl whitespace-pre-wrap ${
                       chat.sender === "user"
                         ? "bg-black ml-auto"
                         : "bg-neutral-800"
                     }`}
                   >
-                    {chat.message}
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
+                      rehypePlugins={[rehypeHighlight]}
+                    >
+                      {smartFormat(chat.message)}
+                    </ReactMarkdown>
                   </p>
                   {chat.sender === "user" && (
-                    <div className="w-10 h-10 rounded-full overflow-hidden">
+                    <div
+                      onClick={handleX}
+                      className="w-10 h-10 rounded-full overflow-hidden cursor-pointer"
+                    >
                       <Image
                         src="/izie.png"
                         alt="userPP"
