@@ -1,10 +1,14 @@
 "use client";
 import { apiClient } from "@/lib/api-client";
 import { mockChats } from "@/lib/chats";
+import { smartFormat } from "@/lib/smartFormatter";
 import { ChatType } from "@/types";
 import { Plus } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import ReactMarkdown from "react-markdown";
+import rehypeHighlight from "rehype-highlight";
+import remarkGfm from "remark-gfm";
 
 export default function Chat({ chatTitle }: { chatTitle: string }) {
   const [messageList, setMessageList] = useState<ChatType[]>(mockChats);
@@ -93,6 +97,18 @@ export default function Chat({ chatTitle }: { chatTitle: string }) {
           };
           setMessageList((prevMessages) => [...prevMessages, botMessage]);
           setIsProcessing(false);
+        } else if (
+          botMsg.data.status === "failed" &&
+          botMsg.data.final_result
+        ) {
+          const botMessage: ChatType = {
+            id: messageList.length + 2,
+            sender: "assistant",
+            message: botMsg.data.final_result.result,
+            timestamp: new Date(),
+          };
+          setMessageList((prevMessages) => [...prevMessages, botMessage]);
+          setIsProcessing(false);
         }
       };
 
@@ -116,15 +132,20 @@ export default function Chat({ chatTitle }: { chatTitle: string }) {
                 }`}
               >
                 <div className={`w-full flex items-start gap-4`}>
-                  <p
-                    className={`px-2 py-3 rounded-2xl ${
+                  <div
+                    className={`px-2 py-3 rounded-2xl whitespace-pre-wrap ${
                       chat.sender === "user"
                         ? "bg-black ml-auto"
                         : "bg-neutral-800"
                     }`}
                   >
-                    {chat.message}
-                  </p>
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
+                      rehypePlugins={[rehypeHighlight]}
+                    >
+                      {chat.message}
+                    </ReactMarkdown>
+                  </div>
                   {chat.sender === "user" && (
                     <div className="w-10 h-10 rounded-full overflow-hidden">
                       <Image
