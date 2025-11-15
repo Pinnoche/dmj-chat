@@ -26,7 +26,7 @@ export default function SideBar() {
           CHAT MEMORY COMING SOON!
         </p>
       </div>
-      <p className="mt-auto text-sm text-center text-white/60">
+      <p className="mt-auto text-xs text-center text-white/60">
         Powered by{" "}
         <a
           href="https://x.com/sentientagi"

@@ -119,7 +119,7 @@ export default function Chat({ chatTitle }: { chatTitle: string }) {
   };
 
   const handleX = () => {
-    window.open("https://x.com/iziedking", "_blank");
+    window.open("https://x.com/Iziedking", "_blank");
   };
 
   return (
@@ -150,7 +150,10 @@ export default function Chat({ chatTitle }: { chatTitle: string }) {
                     </ReactMarkdown>
                   </div>
                   {chat.sender === "user" && (
-                    <div className="w-10 h-10 rounded-full overflow-hidden">
+                    <div
+                      onClick={handleX}
+                      className="w-10 h-10 rounded-full overflow-hidden cursor-pointer"
+                    >
                       <Image
                         src="/izie.png"
                         alt="userPP"
