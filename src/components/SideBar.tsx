@@ -33,7 +33,7 @@ export default function SideBar() {
           target="_blank"
           className="font-semibold text-white"
         >
-          SentientAGI ROMA
+          SentientAGI ROMA v2
         </a>{" "}
         © 2025
       </p>
