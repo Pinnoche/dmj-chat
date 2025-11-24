@@ -122,7 +122,7 @@ export default function Chat({ chatTitle }: { chatTitle: string }) {
   };
 
   return (
-    <div className="w-full px-16 py-6 flex-1 flex flex-col justify-between overflow-y-auto">
+    <div className="w-full px-16 py-6 flex-1 flex flex-col justify-between overflow-y-auto max-sm:px-2">
       <div className="w-full flex-1 overflow-y-auto space-y-8 p-2 custom-scrollbar">
         {chatTitle === "DMJ CHAT"
           ? dmjmessageList.length > 0 &&
@@ -216,21 +216,21 @@ export default function Chat({ chatTitle }: { chatTitle: string }) {
         )}
         <div ref={lastMsgRef}></div>
       </div>
-      <div className="w-full sticky bottom-0 pt-3 mt-4 backdrop-blur-md">
+      <div className="w-full sticky bottom-0 pt-3 mt-4 backdrop-blur-md max-sm:pb-2">
         <form className="w-full relative" onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder="Ask Questions Here"
             value={userMessage}
             onChange={(e) => setUserMessage(e.target.value)}
-            className="w-full border border-white/60 rounded-3xl px-20 py-5 outline-none"
+            className="w-full border border-white/60 rounded-3xl px-20 py-5 outline-none max-sm:py-3 max-sm:text-[14px]"
           />
           <div className="absolute top-1/2 -translate-y-1/2 left-4 p-2 hover:bg-black rounded-full cursor-pointer">
             <Plus className="w-7 h-7 text-white/60" />
           </div>
           <button
             onClick={handleSubmit}
-            className={`absolute top-1/2 right-4 -translate-y-1/2 text-black px-4 py-1 rounded-4xl ${
+            className={`absolute top-1/2 right-4 -translate-y-1/2 text-black px-4 py-1 max-sm:px-2 max-sm:py-0.5 max-sm:text-[12px] rounded-4xl ${
               !userMessage || isProcessing
                 ? "cursor-default bg-white/60"
                 : "bg-white cursor-pointer hover:bg-white/90"
