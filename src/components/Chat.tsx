@@ -20,7 +20,7 @@ export default function Chat({ chatTitle }: { chatTitle: string }) {
     if (lastMsgRef.current) {
       lastMsgRef.current?.scrollIntoView({ behavior: "smooth" });
     }
-  }, [messageList]);
+  }, [messageList, dmjmessageList]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
