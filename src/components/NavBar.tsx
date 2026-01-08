@@ -37,7 +37,7 @@ export default function NavBar({
         </button>
         <button
           className="bg-donate hover:bg-red-600 text-white px-4 py-2 rounded-full shadow-lg animate-pulse max-sm:text-[12px] max-sm:px-2 max-sm:py-1"
-          onClick={() => window.open("/donate", "_blank")}
+          onClick={() => window.open("#")}
         >
           💖 Donate
         </button>
