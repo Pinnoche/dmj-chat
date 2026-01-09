@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [isDMJChat, setIsDMJChat] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
   const fetchUser = async () => {
     try {
       await apiClient.get("/auth/me");
@@ -19,6 +21,7 @@ export default function Home() {
   useEffect(() => {
     fetchUser();
   }, []);
+
   const chatTitle = isDMJChat ? "DMJ CHAT" : "ZUBIN CHAT";
   const [openDonateModal, setOpenDonateModal] = useState<boolean>(false);
   const [isBlur, setIsBlur] = useState<boolean>(false);

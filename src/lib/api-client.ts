@@ -29,13 +29,11 @@ apiClient.interceptors.response.use(
       _retry?: boolean;
     };
     console.log("Interceptor caught error", error);
-
-    console.log(originalRequest?.url);
     if (originalRequest?.url?.includes("/auth/refresh-token")) {
       return Promise.reject(error);
     }
     console.log(error);
-    return error.response?.status === 401 &&
+    return (error.response?.status === 401 || error.response?.status === 429) &&
       !originalRequest._retry &&
       isBrowser
       ? handle401Error(originalRequest)
@@ -52,13 +50,11 @@ const handle401Error = async (
   originalRequest: InternalAxiosRequestConfig & { _retry?: boolean }
 ) => {
   originalRequest._retry = true;
-  console.log("Promises....");
   if (!refreshPromise) {
     refreshPromise = apiClient.post(`/auth/refresh-token`);
   }
 
   try {
-    console.log("hfdsfjsfsjh");
     const res = await refreshPromise;
     clearRefreshPromise();
     const newToken = res.data.token;

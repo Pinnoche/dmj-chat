@@ -50,7 +50,7 @@ export default function SideBar({
         <LogOut className="cursor-pointer text-red-500 hover:text-red-700 self-end" />
         SignOut
       </div>
-      <p className="mt-auto text-xs text-center text-white/60">
+      {/* <p className="mt-auto text-xs text-center text-white/60">
         Powered by{" "}
         <a
           href="https://x.com/sentientagi"
@@ -60,7 +60,7 @@ export default function SideBar({
           SentientAGI ROMA v2
         </a>{" "}
         © 2025
-      </p>
+      </p> */}
     </div>
   );
 }
