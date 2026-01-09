@@ -33,9 +33,7 @@ export default function LoginContent() {
       setFormData({ email: "", password: "" });
       setIsSubmitting(false);
       toast.success("Welcome back, Cracked Degener 😁");
-      setTimeout(() => {
-        router.push("/");
-      }, 2000);
+      router.push("/");
     } catch (error) {
       console.error("Login failed:", error);
       const err = getErrorMessage(error);

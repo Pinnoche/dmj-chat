@@ -24,11 +24,9 @@ export default function SignupContent() {
       setIsSubmitting(true);
       const res = await apiClient.post("/auth/signup", formData);
       localStorage.setItem("token", res.data.token);
-      toast.success("Welcome to DegenXpert 😁");
+      toast.success("Welcome to DMJ's DegenXpert 😁");
       setIsSubmitting(false);
-      setTimeout(() => {
-        router.push("/");
-      }, 2000);
+      router.push("/");
     } catch (error) {
       console.error(error);
       const err = getErrorMessage(error);
