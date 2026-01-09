@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     url: "https://degenxpert.xyz",
     images: [
       {
-        url: "https://degenxpert.xyz/og-image.png",
+        url: "https://degenxpert.xyz/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "DegenXpert - AI Chat Interface",
