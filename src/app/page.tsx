@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [isDMJChat, setIsDMJChat] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [errorStat, setErrorStat] = useState<string | number>(true);
+  const [errorStat, setErrorStat] = useState<string | number>('');
   const chatTitle = isDMJChat ? "DMJ CHAT" : "ZUBIN CHAT";
   const [openDonateModal, setOpenDonateModal] = useState<boolean>(false);
   const [isBlur, setIsBlur] = useState<boolean>(false);
