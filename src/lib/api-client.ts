@@ -1,7 +1,7 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 import { AUTH_ENDPOINTS } from "./contants";
 
-const baseUrl = "http://localhost:4000";
+const baseUrl = process.env.NEXT_PUBLIC_API_URL2 || "http://localhost:4000";
 
 export const apiClient = axios.create({
   baseURL: `${baseUrl}/api/v1`,
