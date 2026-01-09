@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [isDMJChat, setIsDMJChat] = useState<boolean>(true);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const fetchUser = async () => {
     try {
