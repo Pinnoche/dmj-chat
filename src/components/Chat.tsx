@@ -45,7 +45,7 @@ export default function Chat({ chatTitle }: { chatTitle: string }) {
 
       if (chatTitle === "DMJ CHAT") {
         const res = await apiClient.post(
-          `${process.env.NEXT_PUBLIC_API_URL2}/api/v1/agents/ask`,
+          `/agents/ask`,
           {
             question: text,
           },
@@ -66,7 +66,7 @@ export default function Chat({ chatTitle }: { chatTitle: string }) {
         return;
       }
       const execute = await apiClient.post(
-        "/executions",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/executions`,
         {
           goal: text,
         },
