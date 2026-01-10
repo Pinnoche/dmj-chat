@@ -10,15 +10,37 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [isDMJChat, setIsDMJChat] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [errorStat, setErrorStat] = useState<string | number>('');
+  const [errorStat, setErrorStat] = useState<string | number>("");
   const chatTitle = isDMJChat ? "DMJ CHAT" : "ZUBIN CHAT";
   const [openDonateModal, setOpenDonateModal] = useState<boolean>(false);
   const [isBlur, setIsBlur] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
+  const handleSideBar = () => {
+    setIsOpen(!isOpen);
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+        setIsOpen(true);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        setIsLoading(true);
         await apiClient.get("/auth/me");
         setIsLoading(false);
       } catch (error: any) {
@@ -43,21 +65,35 @@ export default function Home() {
   }
 
   return (
-    <div className="w-full h-screen flex bg-primary font-sans text-text-primary">
+    <div className="w-full h-dvh flex bg-primary font-sans text-text-primary overflow-hidden">
       {isBlur && (
-        <div className="w-full h-screen fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center px-4">
+        <div className="w-full h-dvh fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center px-4">
           <div className="text-white text-lg">See you soon...</div>
         </div>
       )}
 
-      <SideBar setIsBlur={setIsBlur} />
-      <main className="w-[80%] bg-primary/80 ml-[20%] flex flex-col">
+      <SideBar
+        setIsBlur={setIsBlur}
+        handleSideBar={handleSideBar}
+        isOpen={isOpen}
+        isMobile={isMobile}
+        onClose={() => setIsOpen(false)}
+      />
+      <main
+        className={`${
+          !isOpen ? "w-full" : "w-[80%] ml-[20%]"
+        } flex flex-col bg-primary/80`}
+      >
         <NavBar
           chatTitle={chatTitle}
           setIsDMJChat={setIsDMJChat}
           setOpenDonateModal={setOpenDonateModal}
+          handleSideBar={handleSideBar}
+          isOpen={isOpen}
         />
+
         <Chat chatTitle={chatTitle} />
+
         {openDonateModal && (
           <Modal onCancel={() => setOpenDonateModal(false)} />
         )}

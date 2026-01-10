@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     url: "https://degenxpert.xyz",
     images: [
       {
-        url: "https://degenxpert.xyz/og-image.jpg",
+        url: "https://degenxpert.xyz/og-image2.png",
         width: 1200,
         height: 630,
         alt: "DegenXpert - AI Chat Interface",
@@ -71,7 +71,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-primary font-sans`}
       >
         <Analytics />
         <ToastContainer />
