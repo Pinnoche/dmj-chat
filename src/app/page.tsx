@@ -53,7 +53,7 @@ export default function Home() {
     fetchUser();
   }, []);
 
-  if (isLoading || errorStat === 401) {
+  if (isLoading || errorStat === 401 || errorStat === 404) {
     return (
       <div className="w-full h-screen flex items-center justify-center bg-primary text-text-primary">
         <div className="flex flex-col items-center">
