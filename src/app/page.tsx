@@ -46,6 +46,7 @@ export default function Home() {
         setUsername(res.data.username);
         setIsLoading(false);
       } catch (error: any) {
+        console.log("erorrs: ", error.response?.status);
         setErrorStat(error.response?.status || "Unknown error");
         console.error(error);
         setIsLoading(false);
