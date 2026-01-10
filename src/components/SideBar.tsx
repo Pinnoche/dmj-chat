@@ -10,12 +10,14 @@ export default function SideBar({
   handleSideBar,
   onClose,
   isOpen,
+  username,
 }: {
   setIsBlur: (value: boolean) => void;
   handleSideBar: () => void;
   isMobile: boolean;
   onClose: () => void;
   isOpen: boolean;
+  username: string;
 }) {
   const handleX = () => {
     window.open("https://x.com/dmj_wise", "_blank");
@@ -67,6 +69,11 @@ export default function SideBar({
                   />
                 </div>
                 <div className="sm:hidden flex items-center gap-2 hover:text-white cursor-pointer">
+                  {username && (
+                    <h2 className="text-white font-semibold max-md:text-sm">
+                      Welcome, {username}
+                    </h2>
+                  )}
                   <MenuIcon
                     onClick={handleSideBar}
                     className="cursor-pointer text-white/70 hover:text-white self-start"

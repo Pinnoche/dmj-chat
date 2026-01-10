@@ -16,6 +16,7 @@ export default function Home() {
   const [isBlur, setIsBlur] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [username, setUsername] = useState<string>("");
 
   const handleSideBar = () => {
     setIsOpen(!isOpen);
@@ -41,7 +42,13 @@ export default function Home() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        await apiClient.get("/auth/me");
+        const res = await apiClient.get("/auth/me");
+        if (res.data.statusCode === 404) {
+          setErrorStat(404);
+          setIsLoading(false);
+          return;
+        }
+        setUsername(res.data.username);
         setIsLoading(false);
       } catch (error: any) {
         setErrorStat(error.response?.status || "Unknown error");
@@ -78,6 +85,7 @@ export default function Home() {
         isOpen={isOpen}
         isMobile={isMobile}
         onClose={() => setIsOpen(false)}
+        username={username}
       />
       <main
         className={`${
