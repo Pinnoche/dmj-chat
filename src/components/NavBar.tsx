@@ -1,21 +1,28 @@
 "use client";
-import Image from "next/image";
+import { MenuIcon } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
 
 export default function NavBar({
   chatTitle,
   setIsDMJChat,
   setOpenDonateModal,
+  handleSideBar,
+  isOpen,
 }: {
   chatTitle: string;
   setIsDMJChat: Dispatch<SetStateAction<boolean>>;
   setOpenDonateModal: Dispatch<SetStateAction<boolean>>;
+  handleSideBar: () => void;
+  isOpen: boolean;
 }) {
   // const handleX = () => {
   //   window.open("https://x.com/sentientagi", "_blank");
   // };
   return (
-    <div className="w-full px-3 py-4 border-b border-white/60 flex items-center justify-between max-sm:py-2 max-sm:px-2">
+    <div className="w-full px-3 py-4 sm:border-b sm:border-white/60 flex items-center justify-between max-sm:px-2">
+      {!isOpen && <div  className="md:hidden flex items-center gap-2 hover:text-white cursor-pointer">
+        <MenuIcon onClick={handleSideBar} className="cursor-pointer text-white/70 hover:text-white self-start" />
+      </div>}
       <h2 className="cursor-default">{chatTitle}</h2>
       {/* <div
         onClick={handleX}
@@ -39,10 +46,10 @@ export default function NavBar({
         </button>
 
         <button
-          className="bg-donate hover:bg-red-600 text-white px-4 py-2 rounded-full shadow-lg animate-pulse max-sm:text-[12px] max-sm:px-2 max-sm:py-1"
+          className="bg-red-400 hover:bg-red-600 text-white px-4 py-2 rounded-full shadow-lg animate-pulse max-sm:text-[12px] max-sm:px-2 max-sm:py-1"
           onClick={() => setOpenDonateModal(true)}
         >
-          🙏 Donate
+          🎁 Donate
         </button>
       </div>
     </div>
