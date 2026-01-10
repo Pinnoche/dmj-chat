@@ -43,10 +43,14 @@ export default function Home() {
     const fetchUser = async () => {
       try {
         const res = await apiClient.get("/auth/me");
+        if (res.data.statusCode === 404) {
+          setErrorStat(404);
+          setIsLoading(false);
+          return;
+        }
         setUsername(res.data.username);
         setIsLoading(false);
       } catch (error: any) {
-        console.log("erorrs: ", error.response?.status);
         setErrorStat(error.response?.status || "Unknown error");
         console.error(error);
         setIsLoading(false);
