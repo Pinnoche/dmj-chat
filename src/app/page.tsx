@@ -39,6 +39,7 @@ export default function Home() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -75,7 +76,7 @@ export default function Home() {
     <div className="w-full h-dvh flex bg-primary font-sans text-text-primary overflow-hidden">
       {isBlur && (
         <div className="w-full h-dvh fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center px-4">
-          <div className="text-white text-lg">See you soon...</div>
+          <div className="text-white text-lg w-max">See you soon...</div>
         </div>
       )}
 

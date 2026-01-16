@@ -78,7 +78,7 @@ export default function Chat({ chatTitle }: { chatTitle: string }) {
       );
       const executionId = execute.data.execution_id;
       const executions = async (executionId: string) => {
-        const botMsg = await apiClient.get(`/executions/${executionId}`, {
+        const botMsg = await apiClient.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/executions/${executionId}`, {
           headers: {
             "X-API-Key": process.env.NEXT_PUBLIC_ZUBIN_API_KEY || "",
           },
